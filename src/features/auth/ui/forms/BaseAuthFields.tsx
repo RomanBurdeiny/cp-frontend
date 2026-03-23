@@ -1,4 +1,4 @@
-import { NamedField } from '@/shared/ui';
+import { NamedField, PasswordField } from '@/shared/ui';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 
 interface BaseAuthFieldsProps {
@@ -45,20 +45,15 @@ export function BaseAuthFields({ t, control, errors }: BaseAuthFieldsProps) {
       <Controller
         control={control}
         name="password"
-        render={({
-          field: { onChange, onBlur, value },
-          fieldState: { isTouched },
-        }) => (
-          <NamedField
+        render={({ field: { onChange, onBlur, value } }) => (
+          <PasswordField
             value={value}
             error={passwordError}
-            touched={isTouched}
             onChangeText={onChange}
             onBlur={onBlur}
             nativeID="auth-password-label"
             label={t('login.password')}
             placeholder={t('login.password')}
-            secureTextEntry
           />
         )}
       />

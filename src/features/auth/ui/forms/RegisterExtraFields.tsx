@@ -1,4 +1,4 @@
-import { NamedField } from '@/shared/ui';
+import { PasswordField } from '@/shared/ui';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
 
 interface RegisterExtraFieldsProps {
@@ -21,21 +21,16 @@ export function RegisterExtraFields({
     <Controller
       control={control}
       name="confirmPassword"
-      render={({
-        field: { onChange, onBlur, value },
-        fieldState: { isTouched },
-      }) => (
-        <NamedField
+      render={({ field: { onChange, onBlur, value } }) => (
+        <PasswordField
           value={value || ''}
           error={confirmPasswordError}
-          touched={isTouched}
           onChangeText={onChange}
           onBlur={onBlur}
           nativeID="auth-confirm-password-label"
           label={t('register.confirmPassword')}
           margin="mb-6"
           placeholder={t('register.confirmPassword')}
-          secureTextEntry
         />
       )}
     />
