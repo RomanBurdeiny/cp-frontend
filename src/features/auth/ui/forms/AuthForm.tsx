@@ -30,7 +30,13 @@ interface AuthFormProps {
   mode: AuthMode;
 }
 
+/** Смена языка пересоздаёт форму — Zod-сообщения берутся из актуальной локали. */
 export function AuthForm({ mode }: AuthFormProps) {
+  const { currentLanguage } = useTranslation('auth');
+  return <AuthFormInner key={`${mode}-${currentLanguage}`} mode={mode} />;
+}
+
+function AuthFormInner({ mode }: AuthFormProps) {
   const { t } = useTranslation('auth');
   const login = useAuthStore((state) => state.login);
   const register = useAuthStore((state) => state.register);

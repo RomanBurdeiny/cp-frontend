@@ -1,13 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm, UseFormReturn } from 'react-hook-form';
 import { AuthFormValues, AuthMode } from '../model';
 import {
+  createLoginSchema,
+  createRegisterBasicSchema,
   LoginFormData,
-  loginSchema,
   RegisterBasicFormData,
-  registerBasicSchema,
 } from '../model/schemas';
 
 interface UseAuthFormOptions {
@@ -36,8 +36,13 @@ const defaultValues: AuthFormValues = {
 export function useAuthForm({ mode }: UseAuthFormOptions): UseAuthFormResult {
   const isRegister = mode === 'register';
 
+  const schema = useMemo(
+    () => (isRegister ? createRegisterBasicSchema() : createLoginSchema()),
+    [isRegister]
+  );
+
   const form = useForm<LoginFormData | RegisterBasicFormData>({
-    resolver: zodResolver(isRegister ? registerBasicSchema : loginSchema),
+    resolver: zodResolver(schema),
     defaultValues,
     mode: 'onBlur',
   });

@@ -3,7 +3,7 @@ import { PrimaryButton } from '@/shared/ui/buttons/PrimaryButton';
 import { Checkbox } from '@/shared/ui/checkbox/Checkbox';
 import { NamedField } from '@/shared/ui';
 import { router } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import {
   KeyboardAvoidingView,
@@ -16,7 +16,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { RegisterFormData } from '../../model/schemas';
-import { registerSchema } from '../../model/schemas';
+import { createRegisterSchema } from '../../model/schemas';
 import { analytics } from '@/features/analytics/lib/track';
 import { useAuthStore } from '../../store/auth.store';
 import { BaseAuthFields } from './BaseAuthFields';
@@ -41,6 +41,8 @@ export function RegisterWithInviteForm({
 
   const [localError, setLocalError] = useState<string | null>(null);
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
+
+  const registerSchema = useMemo(() => createRegisterSchema(), []);
 
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
