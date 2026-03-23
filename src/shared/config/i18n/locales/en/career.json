@@ -1,0 +1,131 @@
+{
+  "createTitle": "Create Career Scenario",
+  "createButton": "Create Scenario",
+  "form": {
+    "title": "Scenario Title",
+    "description": "Description",
+    "direction": "Direction",
+    "level": "Level",
+    "isActive": "Active",
+    "actions": "Actions",
+    "actionType": "Action Type",
+    "actionTitle": "Action Title",
+    "actionDescription": "Action Description",
+    "actionLink": "Link (optional)",
+    "addAction": "Add Action",
+    "removeAction": "Remove Action",
+    "cancel": "Cancel",
+    "submit": "Create",
+    "saveChanges": "Save changes"
+  },
+  "actionTypes": {
+    "lecture": "Lecture",
+    "consultation": "Consultation",
+    "community": "Community",
+    "article": "Article"
+  },
+  "directions": {
+    "Creative": "Creative",
+    "IT": "IT",
+    "Design": "Design",
+    "E-commerce": "E-commerce",
+    "HoReCa": "HoReCa",
+    "Architecture & Design": "Architecture & Design",
+    "Production": "Production"
+  },
+  "levels": {
+    "Junior": "Junior",
+    "Middle": "Middle",
+    "Senior": "Senior",
+    "Lead": "Lead"
+  },
+  "validation": {
+    "titleMin": "Title must be at least 5 characters",
+    "titleMax": "Title must not exceed 200 characters",
+    "descriptionMin": "Description must be at least 20 characters",
+    "descriptionMax": "Description must not exceed 5000 characters",
+    "directionInvalid": "Invalid direction",
+    "levelInvalid": "Invalid level",
+    "actionsRequired": "At least one action is required",
+    "actionTypeInvalid": "Invalid action type",
+    "actionTitleMin": "Action title must be at least 3 characters",
+    "actionTitleMax": "Action title must not exceed 200 characters",
+    "actionDescriptionMin": "Action description must be at least 10 characters",
+    "actionDescriptionMax": "Action description must not exceed 1000 characters",
+    "actionLinkInvalid": "Link must be a valid URL"
+  },
+  "errors": {
+    "forbidden": "Access denied. Only administrators can create career scenarios.",
+    "validationError": "Validation error",
+    "createError": "Error creating scenario",
+    "networkError": "Network error"
+  },
+  "success": {
+    "created": "Career scenario created successfully"
+  },
+  "recommendations": {
+    "title": "Personal Recommendations",
+    "goBack": "Back",
+    "loading": "Loading recommendations…",
+    "empty": "No recommendations available",
+    "profile": {
+      "title": "Your Profile",
+      "direction": "Direction",
+      "level": "Level",
+      "careerGoal": "Career Goal"
+    },
+    "actions": {
+      "openLink": "Open Link",
+      "noLink": "No link available"
+    },
+    "errors": {
+      "fetchError": "Error loading recommendations",
+      "noProfile": "Profile not found. Please create your profile first."
+    }
+  },
+  "scenarios": {
+    "listTitle": "All Career Scenarios",
+    "empty": "No scenarios found",
+    "total": "Total: {{count}}",
+    "edit": "Edit",
+    "delete": "Delete",
+    "editTitle": "Edit Scenario",
+    "deleteConfirm": "Delete scenario?",
+    "deleteSuccess": "Scenario deleted",
+    "updateSuccess": "Scenario updated",
+    "notFound": "Scenario not found",
+    "back": "Back",
+    "createdBy": "Created by",
+    "createdAt": "Created",
+    "updatedAt": "Updated",
+    "actionsCount": "Actions: {{count}}",
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "filters": {
+      "title": "Filters",
+      "hint": "Use filters to search scenarios",
+      "direction": "Direction",
+      "level": "Level",
+      "isActive": "Status",
+      "apply": "Apply",
+      "reset": "Reset"
+    },
+    "details": {
+      "title": "Scenario Details",
+      "description": "Description",
+      "metadata": "Scenario Information"
+    },
+    "errors": {
+      "fetchError": "Error loading scenarios",
+      "updateError": "Error updating scenario",
+      "deleteError": "Error deleting scenario"
+    }
+  },
+  "isActive": {
+    "All": "All",
+    "Active": "Active",
+    "Inactive": "Inactive"
+  }
+}
