@@ -39,19 +39,48 @@ const resources = {
   },
 };
 
-const LANGUAGE_KEY = 'app_language';
+export const LANGUAGE_KEY = 'app_language';
 
+/**
+ * Стартовый язык при загрузке модуля.
+ * На web НЕ читаем localStorage здесь: при `expo export` нет `window`, в браузере он есть —
+ * получался разный `lng` у пререндера и первого кадра → React #418 (hydration mismatch).
+ * Сохранённый язык применяется после mount: `applyClientLanguagePreference()`.
+ */
 function getInitialLng(): string {
-  if (Platform.OS === 'web' && typeof window !== 'undefined') {
-    try {
-      const stored = localStorage.getItem(LANGUAGE_KEY);
-      if (stored === 'en' || stored === 'ru') return stored;
-    } catch {
-      // ignore
-    }
+  if (Platform.OS === 'web') {
+    return 'ru';
   }
   const device = Localization.getLocales()[0]?.languageCode?.slice(0, 2);
   return device === 'en' ? 'en' : 'ru';
+}
+
+/**
+ * Только клиент, после гидрации: localStorage → иначе язык браузера.
+ * Вызвать из root layout в `useEffect`.
+ */
+export function applyClientLanguagePreference(): void {
+  if (Platform.OS !== 'web' || typeof window === 'undefined') {
+    return;
+  }
+
+  try {
+    const stored = localStorage.getItem(LANGUAGE_KEY);
+    if (stored === 'en' || stored === 'ru') {
+      void i18n.changeLanguage(stored);
+      return;
+    }
+  } catch {
+    // ignore
+  }
+
+  const nav =
+    typeof navigator !== 'undefined'
+      ? navigator.language?.slice(0, 2).toLowerCase()
+      : '';
+  if (nav === 'en') {
+    void i18n.changeLanguage('en');
+  }
 }
 
 // eslint-disable-next-line import/no-named-as-default-member

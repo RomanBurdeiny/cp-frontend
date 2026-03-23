@@ -6,13 +6,15 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Slot } from 'expo-router';
 import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import '../src/shared/config/i18n';
+import { applyClientLanguagePreference } from '../src/shared/config/i18n';
 import './global.css';
 
 export default function RootLayout() {
   const initializeAuth = useAuthStore((state) => state.initializeAuth);
 
   useEffect(() => {
+    applyClientLanguagePreference();
+
     const ejectInterceptors = setupAuthInterceptors();
 
     initializeAuth();
