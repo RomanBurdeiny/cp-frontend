@@ -363,12 +363,12 @@ export function CareerScenarioForm({
             </Text>
           )}
 
-          <View className="flex-row gap-3">
+          <View className="flex-row items-stretch gap-3">
             <View className="flex-1">
               <PrimaryButton
                 onPress={onCancel}
                 accessibilityLabel={t('form.cancel')}
-                className="border border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800"
+                className="mb-0 border border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-800"
                 textClassName="text-center text-base font-semibold text-gray-700 dark:text-gray-300"
                 disabled={isLoading}
               >

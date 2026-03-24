@@ -22,7 +22,7 @@ export function PrimaryButton({
   ...props
 }: PrimaryButtonProps) {
   const isDisabled = disabled ?? isLoading;
-  const buttonClassName = `mb-4 rounded-lg px-6 py-4 ${
+  const buttonClassName = `mb-4 justify-center rounded-lg px-6 py-4 ${
     isDisabled
       ? 'bg-gray-300 dark:bg-gray-700'
       : isLoading
