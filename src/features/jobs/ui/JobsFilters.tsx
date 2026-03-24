@@ -188,21 +188,25 @@ export function JobsFilters({
             />
           </View>
 
-          <View className="mt-1 flex-row items-stretch justify-between gap-2">
-            <PrimaryButton
-              onPress={handleSubmit(handleFormSubmit)}
-              accessibilityLabel={t('filters.apply')}
-              className="mb-0 flex-1"
-              isLoading={isLoading}
-            >
-              {t('filters.apply')}
-            </PrimaryButton>
-            <FilterSecondaryButton
-              label={t('filters.reset')}
-              onPress={handleReset}
-              accessibilityLabel={t('filters.reset')}
-              className="flex-1"
-            />
+          <View className="mt-1 flex-row gap-2">
+            <View className="min-w-0 flex-1">
+              <PrimaryButton
+                onPress={handleSubmit(handleFormSubmit)}
+                accessibilityLabel={t('filters.apply')}
+                className="mb-0 w-full"
+                isLoading={isLoading}
+              >
+                {t('filters.apply')}
+              </PrimaryButton>
+            </View>
+            <View className="min-w-0 flex-1">
+              <FilterSecondaryButton
+                label={t('filters.reset')}
+                onPress={handleReset}
+                accessibilityLabel={t('filters.reset')}
+                className="w-full"
+              />
+            </View>
           </View>
         </>
       )}
