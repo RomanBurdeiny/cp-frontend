@@ -7,6 +7,7 @@ import type {
 } from '@/features/jobs/model';
 import { jobsFiltersFormSchema } from '@/features/jobs/model/schemas';
 import { useTranslation } from '@/shared/lib/hooks/useTranslation';
+import { FilterSecondaryButton } from '@/shared/ui/buttons/FilterSecondaryButton';
 import { PrimaryButton } from '@/shared/ui/buttons/PrimaryButton';
 import { NamedField } from '@/shared/ui/inputs/NamedField';
 import { ChipSelector } from '@/shared/ui/selectors/ChipSelector';
@@ -196,17 +197,12 @@ export function JobsFilters({
             >
               {t('filters.apply')}
             </PrimaryButton>
-            <Pressable
+            <FilterSecondaryButton
+              label={t('filters.reset')}
               onPress={handleReset}
-              accessibilityRole="button"
               accessibilityLabel={t('filters.reset')}
-              className="mb-0 flex-1 justify-center rounded-lg border-2 border-blue-600 bg-white px-4 py-3.5 active:opacity-90 dark:border-blue-400 dark:bg-gray-900"
-              style={({ pressed }) => (pressed ? { opacity: 0.85 } : undefined)}
-            >
-              <Text className="text-center text-base font-semibold text-blue-700 dark:text-blue-300">
-                {t('filters.reset')}
-              </Text>
-            </Pressable>
+              className="flex-1"
+            />
           </View>
         </>
       )}

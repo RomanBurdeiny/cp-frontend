@@ -7,6 +7,7 @@ import type {
 } from '@/features/career/model';
 import { scenariosFiltersFormSchema } from '@/features/career/model/schemas';
 import { useTranslation } from '@/shared/lib/hooks/useTranslation';
+import { FilterSecondaryButton } from '@/shared/ui/buttons/FilterSecondaryButton';
 import { PrimaryButton } from '@/shared/ui/buttons/PrimaryButton';
 import { ChipSelector } from '@/shared/ui/selectors/ChipSelector';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -183,22 +184,21 @@ export function ScenariosFilters({
             />
           </View>
 
-          <View className="mt-1 flex-row justify-between gap-2">
+          <View className="mt-1 flex-row items-stretch justify-between gap-2">
             <PrimaryButton
               onPress={handleSubmit(handleFormSubmit)}
               accessibilityLabel={t('scenarios.filters.apply')}
-              className="flex-1"
+              className="mb-0 flex-1"
               isLoading={isLoading}
             >
               {t('scenarios.filters.apply')}
             </PrimaryButton>
-            <PrimaryButton
+            <FilterSecondaryButton
+              label={t('scenarios.filters.reset')}
               onPress={handleReset}
               accessibilityLabel={t('scenarios.filters.reset')}
-              className="flex-1 bg-gray-200 dark:bg-gray-700"
-            >
-              {t('scenarios.filters.reset')}
-            </PrimaryButton>
+              className="flex-1"
+            />
           </View>
         </>
       )}
