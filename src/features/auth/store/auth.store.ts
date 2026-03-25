@@ -1,5 +1,5 @@
 import { secureStorage } from '@/features/auth/lib';
-import { handleApiError } from '@/shared/config/api';
+import { resolveAuthFlowErrorMessage } from '@/features/auth/lib/mapBackendAuthError';
 import i18n from '@/shared/config/i18n';
 import { UserRole } from '@/shared/model';
 import { Platform } from 'react-native';
@@ -78,7 +78,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         authError: null,
       });
     } catch (error) {
-      const errorMessage = handleApiError(error);
+      const errorMessage = resolveAuthFlowErrorMessage(error);
       set({
         isAuthenticated: false,
         user: null,
@@ -111,7 +111,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         authError: null,
       });
     } catch (error) {
-      const errorMessage = handleApiError(error);
+      const errorMessage = resolveAuthFlowErrorMessage(error);
       set({
         isAuthenticated: false,
         user: null,
@@ -138,7 +138,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         authError: null,
       });
     } catch (error) {
-      const errorMessage = handleApiError(error);
+      const errorMessage = resolveAuthFlowErrorMessage(error);
       set({
         isAuthenticated: false,
         user: null,
@@ -167,7 +167,7 @@ export const useAuthStore = create<AuthStore>((set, get) => ({
         authError: null,
       });
     } catch (error) {
-      const errorMessage = handleApiError(error);
+      const errorMessage = resolveAuthFlowErrorMessage(error);
       set({
         isAuthenticated: false,
         user: null,

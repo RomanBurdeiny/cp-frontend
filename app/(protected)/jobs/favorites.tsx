@@ -4,10 +4,10 @@ import { useProfileStore } from '@/features/profile/store/profile-store';
 import { useTranslation } from '@/shared/lib/hooks/useTranslation';
 import { useExitOrBack } from '@/shared/lib/hooks/useExitOrBack';
 import { IconNavPressable } from '@/shared/ui';
-import { PrimaryButton } from '@/shared/ui/buttons/PrimaryButton';
 import { useRouter } from 'expo-router';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useEffect } from 'react';
-import { FlatList, Text, View, useColorScheme } from 'react-native';
+import { FlatList, Pressable, Text, View, useColorScheme } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function FavoritesScreen() {
@@ -22,6 +22,8 @@ export default function FavoritesScreen() {
   } = useJobsStore();
   const { t } = useTranslation('jobs');
   const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
+  const tabBarMuted = isDark ? '#9ca3af' : '#6b7280';
   const router = useRouter();
   const exitOrBack = useExitOrBack();
 
@@ -67,12 +69,18 @@ export default function FavoritesScreen() {
               accessibilityLabel={t('goHome')}
               onPress={() => router.replace('/profile')}
             />
-            <PrimaryButton
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={t('listTitle')}
               onPress={() => router.replace('/jobs')}
-              className="px-4 py-2"
+              className="rounded-lg p-2 active:opacity-70 dark:active:opacity-80"
             >
-              {t('listTitle')}
-            </PrimaryButton>
+              <MaterialIcons
+                name="work-outline"
+                size={24}
+                color={tabBarMuted}
+              />
+            </Pressable>
           </View>
         </View>
 

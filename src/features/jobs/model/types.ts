@@ -26,6 +26,8 @@ export interface IJobsFilters {
   level?: Level;
   workFormat?: JobWorkFormat;
   location?: string;
+  /** Подстрока по title, description, company (бэкенд GET /jobs?search=) */
+  search?: string;
 }
 
 export type DirectionFilterValue = (typeof DIRECTION_FILTER_VALUES)[number];

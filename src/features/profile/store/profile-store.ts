@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import i18n from '@/shared/config/i18n';
 import { analytics } from '@/features/analytics/lib/track';
+import { useCareerStore } from '@/features/career/store/career-store';
 import * as profileApi from '../api/profile.api';
 import { Profile } from '../model';
 
@@ -101,6 +102,7 @@ export const useProfileStore = create<ProfileState>((set, get) => ({
       }
       const profile = await profileApi.createProfile(payload);
       get().setProfile(profile);
+      void useCareerStore.getState().fetchRecommendations();
       analytics.profileCreated();
       analytics.profileCompleted();
       set({ isLoading: false });
@@ -122,6 +124,7 @@ export const useProfileStore = create<ProfileState>((set, get) => ({
       }
       const profile = await profileApi.updateProfile(payload);
       get().setProfile(profile);
+      void useCareerStore.getState().fetchRecommendations();
       analytics.profileUpdated();
       set({ isLoading: false });
     } catch (error) {

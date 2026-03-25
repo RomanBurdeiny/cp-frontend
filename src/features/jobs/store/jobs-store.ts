@@ -73,7 +73,12 @@ export const useJobsStore = create<JobsState>((set, get) => ({
   fetchJobs: async () => {
     set({ isLoading: true, error: null });
     try {
-      const filters = get().filters;
+      const f = get().filters;
+      const searchTrimmed = f.search?.trim();
+      const filters: IJobsFilters = {
+        ...f,
+        search: searchTrimmed || undefined,
+      };
       const { jobs, total }: JobsListResponse = await jobsApi.getJobs(filters);
       set({ jobs, total, isLoading: false });
     } catch (error) {

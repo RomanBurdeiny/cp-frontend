@@ -155,6 +155,7 @@ export const jobsFiltersFormSchema = z.object({
   level: z.enum(LEVEL_FILTER_VALUES).optional(),
   workFormat: z.enum(WORK_FORMAT_FILTER_VALUES).optional(),
   location: z.string().optional(),
+  search: z.string().optional(),
 });
 
 export type JobsFiltersFormValues = z.infer<typeof jobsFiltersFormSchema>;

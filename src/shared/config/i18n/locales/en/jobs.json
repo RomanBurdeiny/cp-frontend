@@ -61,7 +61,9 @@
     "level": "Level",
     "workFormat": "Work format",
     "location": "Location",
-    "locationPlaceholder": "e.g. Moscow, Saint Petersburg"
+    "locationPlaceholder": "e.g. Moscow, Saint Petersburg",
+    "search": "Search",
+    "searchPlaceholder": "Title, company, or description"
   },
   "openJobsButton": "Jobs",
   "detailsTitle": "Job details",

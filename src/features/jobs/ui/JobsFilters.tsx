@@ -48,6 +48,7 @@ export function JobsFilters({
       level: filters.level ?? 'All',
       workFormat: filters.workFormat ?? 'All',
       location: filters.location ?? '',
+      search: filters.search ?? '',
     },
     mode: 'onChange',
   });
@@ -57,6 +58,7 @@ export function JobsFilters({
   const watchedLevel = watchedValues.level ?? 'All';
   const watchedWorkFormat = watchedValues.workFormat ?? 'All';
   const watchedLocation = watchedValues.location ?? '';
+  const watchedSearch = watchedValues.search ?? '';
 
   useEffect(() => {
     reset({
@@ -64,6 +66,7 @@ export function JobsFilters({
       level: filters.level ?? 'All',
       workFormat: filters.workFormat ?? 'All',
       location: filters.location ?? '',
+      search: filters.search ?? '',
     });
   }, [filters, reset]);
 
@@ -71,14 +74,17 @@ export function JobsFilters({
     (watchedDirection !== 'All' ? 1 : 0) +
     (watchedLevel !== 'All' ? 1 : 0) +
     (watchedWorkFormat !== 'All' ? 1 : 0) +
-    (watchedLocation ? 1 : 0);
+    (watchedLocation ? 1 : 0) +
+    (watchedSearch.trim() ? 1 : 0);
 
   const handleFormSubmit = (data: JobsFiltersFormValues) => {
+    const search = data.search?.trim();
     const partial: Partial<IJobsFilters> = {
       direction: data.direction === 'All' ? undefined : data.direction,
       level: data.level === 'All' ? undefined : data.level,
       workFormat: data.workFormat === 'All' ? undefined : data.workFormat,
       location: data.location?.trim(),
+      search: search || undefined,
     };
     onChange(partial);
     onApply();
@@ -90,6 +96,7 @@ export function JobsFilters({
       level: 'All',
       workFormat: 'All',
       location: '',
+      search: '',
     });
     onReset();
   };
@@ -183,6 +190,23 @@ export function JobsFilters({
                   onChangeText={onChange}
                   onBlur={onBlur}
                   placeholder={t('filters.locationPlaceholder')}
+                />
+              )}
+            />
+
+            <Controller
+              control={control}
+              name="search"
+              render={({ field: { onChange, onBlur, value } }) => (
+                <NamedField
+                  label={t('filters.search')}
+                  value={value ?? ''}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  placeholder={t('filters.searchPlaceholder')}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  margin="mt-3"
                 />
               )}
             />

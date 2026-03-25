@@ -2,6 +2,7 @@ import {
   CreateCareerScenarioPayload,
   createCareerScenarioSchema,
 } from '@/features/career/model';
+import type { z } from 'zod';
 import { ACTION_TYPE_VALUES } from '@/features/career/model/constants';
 import { useTranslation } from '@/shared/lib/hooks/useTranslation';
 import { DIRECTION_VALUES, LEVEL_VALUES } from '@/shared/model';
@@ -44,12 +45,15 @@ export function CareerScenarioForm({
 }: CareerScenarioFormProps) {
   const { t } = useTranslation('career');
 
+  type CareerScenarioFormInput = z.input<typeof createCareerScenarioSchema>;
+  type CareerScenarioFormOutput = z.output<typeof createCareerScenarioSchema>;
+
   const {
     control,
     handleSubmit: rhfHandleSubmit,
     formState: { errors },
     reset,
-  } = useForm<CreateCareerScenarioPayload>({
+  } = useForm<CareerScenarioFormInput, unknown, CareerScenarioFormOutput>({
     resolver: zodResolver(createCareerScenarioSchema),
     defaultValues: {
       title: initialValues?.title ?? '',
@@ -101,12 +105,15 @@ export function CareerScenarioForm({
       direction: data.direction,
       level: data.level,
       isActive: data.isActive ?? true,
-      actions: data.actions.map((action) => ({
-        type: action.type,
-        title: action.title.trim(),
-        description: action.description.trim(),
-        ...(action.link && action.link.trim() && { link: action.link.trim() }),
-      })),
+      actions: data.actions.map((action) => {
+        const linkTrim = action.link?.trim();
+        return {
+          type: action.type,
+          title: action.title.trim(),
+          description: action.description.trim(),
+          link: linkTrim ? linkTrim : undefined,
+        };
+      }),
     };
 
     await onSubmit(payload);
@@ -298,7 +305,7 @@ export function CareerScenarioForm({
                   }) => (
                     <NamedField
                       label={t('form.actionTitle')}
-                      value={value}
+                      value={value ?? ''}
                       onChangeText={onChange}
                       onBlur={onBlur}
                       placeholder={t('form.actionTitle')}
@@ -319,7 +326,7 @@ export function CareerScenarioForm({
                   }) => (
                     <NamedField
                       label={t('form.actionDescription')}
-                      value={value}
+                      value={value ?? ''}
                       onChangeText={onChange}
                       onBlur={onBlur}
                       placeholder={t('form.actionDescription')}

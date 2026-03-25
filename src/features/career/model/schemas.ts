@@ -11,25 +11,42 @@ import {
 const getCareerValidationMessage = (key: string) =>
   getValidationMessage(key, 'career');
 
+const trimmedNonEmptyString = z
+  .union([z.string(), z.undefined(), z.null()])
+  .transform((v) => (v == null ? '' : String(v)).trim());
+
 const careerScenarioActionSchema = z.object({
   type: z.enum([...ACTION_TYPE_VALUES] as [string, ...string[]], {
     message: getCareerValidationMessage('actionTypeInvalid'),
   }),
-  title: z
-    .string()
-    .min(3, getCareerValidationMessage('actionTitleMin'))
-    .max(200, getCareerValidationMessage('actionTitleMax'))
-    .trim(),
-  description: z
-    .string()
-    .min(10, getCareerValidationMessage('actionDescriptionMin'))
-    .max(1000, getCareerValidationMessage('actionDescriptionMax'))
-    .trim(),
+  title: trimmedNonEmptyString.pipe(
+    z
+      .string()
+      .min(3, getCareerValidationMessage('actionTitleMin'))
+      .max(200, getCareerValidationMessage('actionTitleMax'))
+  ),
+  description: trimmedNonEmptyString.pipe(
+    z
+      .string()
+      .min(10, getCareerValidationMessage('actionDescriptionMin'))
+      .max(1000, getCareerValidationMessage('actionDescriptionMax'))
+  ),
   link: z
-    .url({
-      message: getCareerValidationMessage('actionLinkInvalid'),
+    .union([z.string(), z.undefined(), z.null()])
+    .transform((v) => {
+      if (v == null) return undefined;
+      const s = String(v).trim();
+      return s === '' ? undefined : s;
     })
-    .optional(),
+    .pipe(
+      z
+        .union([
+          z.undefined(),
+          z.string().url({
+            message: getCareerValidationMessage('actionLinkInvalid'),
+          }),
+        ])
+    ),
 });
 
 export const createCareerScenarioSchema = z.object({

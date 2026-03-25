@@ -1,6 +1,7 @@
 import { analytics } from '@/features/analytics/lib/track';
 import { useCareerStore } from '@/features/career/store';
 import { RecommendationCard } from '@/features/career/ui';
+import { useProfileStore } from '@/features/profile/store/profile-store';
 import { useTranslation } from '@/shared/lib/hooks/useTranslation';
 import { useExitOrBack } from '@/shared/lib/hooks/useExitOrBack';
 import { FullScreenLoader, IconNavPressable } from '@/src/shared/ui';
@@ -16,6 +17,7 @@ export default function RecommendationsScreen() {
     error,
     fetchRecommendations,
   } = useCareerStore();
+  const profile = useProfileStore((s) => s.profile);
   const { t } = useTranslation('career');
   const { t: tProfile } = useTranslation('profile');
   const router = useRouter();
@@ -73,15 +75,13 @@ export default function RecommendationsScreen() {
     );
   }
 
+  const chipSource = profile ?? recommendations.profile;
   const directionText =
-    t(`directions.${recommendations.profile.direction}`) ||
-    recommendations.profile.direction;
-  const levelText =
-    t(`levels.${recommendations.profile.level}`) ||
-    recommendations.profile.level;
+    t(`directions.${chipSource.direction}`) || chipSource.direction;
+  const levelText = t(`levels.${chipSource.level}`) || chipSource.level;
   const careerGoalText =
-    tProfile(`careerGoals.${recommendations.profile.careerGoal}`) ||
-    recommendations.profile.careerGoal;
+    tProfile(`careerGoals.${chipSource.careerGoal}`) ||
+    chipSource.careerGoal;
 
   return (
     <SafeAreaView

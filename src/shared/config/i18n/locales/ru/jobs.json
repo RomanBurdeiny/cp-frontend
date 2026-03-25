@@ -61,7 +61,9 @@
     "level": "Уровень",
     "workFormat": "Формат работы",
     "location": "Локация",
-    "locationPlaceholder": "Например: Москва, Санкт-Петербург"
+    "locationPlaceholder": "Например: Москва, Санкт-Петербург",
+    "search": "Поиск",
+    "searchPlaceholder": "Должность, компания, текст из описания"
   },
   "openJobsButton": "Вакансии",
   "detailsTitle": "Вакансия",
